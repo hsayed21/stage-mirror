@@ -1,0 +1,9 @@
+.vscode/**
+node_modules/**
+src/**
+.gitignore
+eslint.config.mjs
+tsconfig.json
+**/*.map
+.vscode-test/**
+coverage/**

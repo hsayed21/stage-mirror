@@ -1,0 +1,99 @@
+{
+  "name": "stage-mirror",
+  "displayName": "Stage Mirror",
+  "description": "Restore selected Git SCM files in the Working Tree from staging while preserving the staging area.",
+  "version": "0.1.0",
+  "publisher": "hsayed",
+  "author": "Hamada Sayed",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "icon": "icon.png",
+  "bugs": {
+    "url": "https://github.com/hsayed21/stage-mirror/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hsayed21/stage-mirror.git"
+  },
+  "keywords": [
+    "git",
+    "scm",
+    "staging",
+    "working tree",
+    "restore"
+  ],
+  "main": "./out/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onCommand:stageMirror.restoreWorkingTreeFromHead"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "Stage Mirror requires a local Git CLI and file-system paths."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "stageMirror.restoreWorkingTreeFromHead",
+        "title": "Restore Working Tree from HEAD",
+        "category": "Stage Mirror"
+      }
+    ],
+    "menus": {
+      "scm/resourceState/context": [
+        {
+          "command": "stageMirror.restoreWorkingTreeFromHead",
+          "when": "scmProvider == git",
+          "group": "5_stageMirror@10"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "stageMirror.restoreWorkingTreeFromHead",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Stage Mirror",
+      "properties": {
+        "stageMirror.confirmBeforeRestore": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask for confirmation before replacing selected Working Tree files with their HEAD versions."
+        },
+        "stageMirror.showSuccessNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a notification after all selected files are restored successfully."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "clean": "node -e \"require('node:fs').rmSync('out', { recursive: true, force: true })\"",
+    "compile": "npm run clean && tsc -p ./",
+    "watch": "npm run clean && tsc -watch -p ./",
+    "lint": "eslint .",
+    "package": "npm run lint && npm run compile && vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "@types/vscode": "^1.125.0",
+    "@vscode/vsce": "^3.9.2",
+    "eslint": "^10.7.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.65.0"
+  }
+}
