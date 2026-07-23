@@ -2,7 +2,7 @@
   "name": "stage-mirror",
   "displayName": "Stage Mirror",
   "description": "Restore selected Git SCM files in the Working Tree from staging while preserving the staging area.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "hsayed",
   "author": "Hamada Sayed",
   "license": "MIT",
